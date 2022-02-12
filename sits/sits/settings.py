@@ -25,7 +25,7 @@ SECRET_KEY = 'uhq1&ci2c=tmamuz)=f+)q)765dpn(43=-t(zvl(oht79_-z9e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
