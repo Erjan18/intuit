@@ -1,0 +1,1 @@
+web gunicorn sits.wsgi:application --log-file
