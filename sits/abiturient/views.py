@@ -9,7 +9,6 @@ from django.views.generic import CreateView
 from django.core.mail import send_mail
 from rest_framework.parsers import MultiPartParser, FormParser
 
-
 class HeadView(APIView):
     def get(self,*args,**kwargs):
         name = Header.objects.all()
@@ -23,9 +22,10 @@ class HeaderView(APIView):
         return Response(serializer.data,status=status.HTTP_200_OK)
 
 class HeadisView(viewsets.ModelViewSet):
-    queryset = Headerdis.objects.all()
-    serializer_class = HeaderdisSerialzers
-
+    def get(self,*args,**kwargs):
+        name= Headerdis.objects.all()
+        serializer = HeaderdisSerialzers(name,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
 
 class FeedBackView(APIView):
     serializer_class = ContactSerailizer
@@ -39,14 +39,14 @@ class FeedBackView(APIView):
                 from_email = data.get('email')
                 subject = data.get('subject')
                 message = data.get('message')
-                send_mail(f'От {name} | {subject}',message, from_email, ['zumc4847@gmail.com'])
+                send_mail(f'От {name} | {subject}',message, from_email, ['intuitkg2020@gmail.com'])
                 return Response("Succes:Sent")
             else:
                 return Response("Failed to Send")
         except Exception as err:
             return Response({err})
 
-class Quiz(generics.ListAPIView):
+class Quiz(APIView):
 
     serializer_class = QuizSerializer
     queryset = Quizzes.objects.all()
@@ -57,6 +57,20 @@ class RandomQuestion(APIView):
         question = Question.objects.filter(quiz__title=kwargs['topic']).order_by('?')[:1]
         serializer = RandomQuestionSerializer(question, many=True)
         return Response(serializer.data)
+
+    def filter(self):
+        if RandomQuestionSerializer.fields == 'Гуманитарным':
+             return Response('Гуманитарным')
+        elif RandomQuestionSerializer.fields == 'Техническим':
+            return Response('Техническим')
+        if RandomQuestionSerializer.fields == 'Колледж':
+            return Response('Колледж')
+        elif RandomQuestionSerializer == 'Бакалавриат':
+            return Response('Бакалавриат')
+        elif RandomQuestionSerializer.fields == 'Аспирантура':
+            return Response('Аспирантура')
+        elif RandomQuestionSerializer.fields == 'Магистратура':
+            return Response('Магистратура')
 
 class QuizQuestion(APIView):
 
@@ -95,7 +109,6 @@ class Description_formView(APIView):
         serializer = Description_formSerializer(name,many=True)
         return Response(serializer.data,status=status.HTTP_200_OK)
 
-
 class Open_dayView(APIView):
     def get(self,*args,**kwargs):
         name = Open_day.objects.all()
@@ -115,11 +128,39 @@ class ConnectView(APIView):
         return Response(serializer.data,status=status.HTTP_200_OK)
 
 class FileView(APIView):
-    parser_classes = (MultiPartParser, FormParser)
-    def post(self, request, *args, **kwargs):
-        file_serializer = FileSerializer(data=request.data)
+    def get(self, request, *args, **kwargs):
+        name = File.objects.all()
+        file_serializer = FileSerializer(name,data=request.data)
         if file_serializer.is_valid():
             file_serializer.save()
-            return Response(file_serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(file_serializer.data, status=status.HTTP_200_OK)
+
+class AbiturientView(APIView):
+    def get(self, request, *args, **kwargs):
+        name = Abiturient.objects.all()
+        serializer = AbiturientSerializers(name, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class CenterView(APIView):
+    def get(self, request, *args, **kwargs):
+        name = Center_carrer.objects.all()
+        serializer = CenterSerializers(name, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class StudentView(APIView):
+    def get(self, request, *args, **kwargs):
+        name = Student.objects.all()
+        serializer = StudentSerializers(name, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class EnactusView(APIView):
+    def get(self, request, *args, **kwargs):
+        name = Enactus.objects.all()
+        serializer = EnactusSerializers(name, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class AboutView(APIView):
+    def get(self, request, *args, **kwargs):
+        name = About.objects.all()
+        serializer = AboutSerializers(name, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

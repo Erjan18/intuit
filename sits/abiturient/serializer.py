@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import *
-
+from phone_field import PhoneField
 
 class HeaderSerializers(serializers.ModelSerializer):
     class Meta:
@@ -8,7 +8,7 @@ class HeaderSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 class HeadDisSerializer(serializers.ModelSerializer):
-    head = HeaderSerializers(read_only=True,many=True)
+    header = HeaderSerializers(read_only=True)
     class Meta:
         model = HeadDis
         fields = '__all__'
@@ -21,7 +21,7 @@ class HeaderdisSerialzers(serializers.ModelSerializer):
 class ContactSerailizer(serializers.Serializer):
     name = serializers.CharField()
     email = serializers.EmailField()
-    subject = serializers.CharField()
+    subject = serializers.IntegerField()
     message = serializers.CharField()
 
 class QuizSerializer(serializers.ModelSerializer):
@@ -101,6 +101,35 @@ class ConnectSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class FileSerializer(serializers.ModelSerializer):
-  class Meta():
-    model = File
-    fields = '__all__'
+    class Meta:
+        model = File
+        fields = '__all__'
+
+
+class AbiturientSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Abiturient
+        fields = '__all__'
+
+class CenterSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Center_carrer
+        fields = '__all__'
+
+class StudentSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = '__all__'
+
+class EnactusSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = Enactus
+        fields = '__all__'
+
+class AboutSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = About
+        fields = '__all__'
+
+
+

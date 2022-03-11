@@ -1,10 +1,10 @@
 from django.contrib import admin
 from . import models
 from .models import Headerdis,Career,Job_fair,Reception_campaign,Forms_of_training,Description_form,Open_day,News_Blog,Connect,File
-from .models import Header,HeadDis
+from .models import Header,HeadDis,Abiturient,Enactus,Student,About,Center_carrer
 
 admin.site.register([Header,HeadDis,Headerdis,Career,Job_fair,Reception_campaign,Forms_of_training,Description_form,
-                     Open_day,News_Blog,Connect,File])
+                     Open_day,News_Blog,Connect,File,Abiturient,Enactus,Student,About,Center_carrer])
 
 class Contact(admin.ModelAdmin):
     list_display = ('last_name','number','mail')
@@ -41,9 +41,6 @@ class QuestionAdmin(admin.ModelAdmin):
     list_display = [
         'title',
         'quiz',
-        'date_updated'
-        ]
-    inlines = [
-        AnswerInlineModel,
+
         ]
 

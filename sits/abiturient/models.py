@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 class Header(models.Model):
-
     class Meta:
         verbose_name = _("Главная")
         verbose_name_plural = _("Главная")
@@ -116,7 +115,6 @@ class Reception_campaign(models.Model):
         verbose_name = _("Приемная")
         verbose_name_plural = _("Приемная")
 
-
     name = models.CharField(max_length=300)
 
     def __str__(self):
@@ -186,9 +184,59 @@ class File(models.Model):
         verbose_name = _("Информация")
         verbose_name_plural = _("Информация")
 
-    file = models.FileField(blank=False, null=False)
+    name = models.CharField(max_length=100)
+    file = models.FileField(blank=True,upload_to='file')
 
     def __str__(self):
-        return self.file
+        return self.name
 
+class Abiturient(models.Model):
+    class Meta:
+        verbose_name = _("Абитуриентам")
+        verbose_name_plural = _("Абитуриентам")
+
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class Center_carrer(models.Model):
+    class Meta:
+        verbose_name = _("Центр Карьеры")
+        verbose_name_plural = _("Центр Карьеры")
+
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class Student(models.Model):
+    class Meta:
+        verbose_name = _("Студентам")
+        verbose_name_plural = _("Студентам")
+
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class Enactus(models.Model):
+    class Meta:
+        verbose_name = _("Enactus")
+        verbose_name_plural = _("Enactus")
+
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+class About(models.Model):
+    class Meta:
+        verbose_name = _("Об Университете")
+        verbose_name_plural = _("Об Университете")
+
+    name = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
 

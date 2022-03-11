@@ -41,7 +41,7 @@ class ParagraphDis(models.Model):
         verbose_name = _("Описание пунктов")
         verbose_name_plural = _("Описание пунктов")
 
-    paragraph = models.ForeignKey(Paragraph,on_delete=models.CASCADE)
+    paragraph = models.ForeignKey(Paragraph,verbose_name="Описание пунктов",on_delete=models.CASCADE)
     name = models.TextField()
 
     def __str__(self):
