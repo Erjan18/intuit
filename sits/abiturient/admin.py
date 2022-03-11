@@ -44,3 +44,6 @@ class QuestionAdmin(admin.ModelAdmin):
 
         ]
 
+    inlines = [
+        AnswerInlineModel,
+    ]
